@@ -15,7 +15,11 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        var_dump($request);exit();
+        $admin = $request->session()->get('oauth_administrator');
+        if ($admin)
+        {
+            return redirect('/dashboard');
+        }
         return $next($request);
     }
 }

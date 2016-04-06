@@ -10,13 +10,18 @@ use Illuminate\Routing\Controller as BaseController;
 
 include_once(__DIR__.'/MyController.php');
 
-class AdminController extends MyController
+class ClientController extends MyController
 {
 
-    public function index(Request $request)
+    public function list(Request $request)
     {
-        echo "admin dashboard";exit();
-        return view('admin.dashboard');
+        return view('client.list');
+    }
+
+    public function add(Request $request))
+    {
+
+        return redirect('/clients');
     }
 
 }

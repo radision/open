@@ -6,8 +6,11 @@ use DB;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
+// use App\Http\Controllers\MyController as MyController;
 
-class IndexController extends BaseController
+include_once(__DIR__.'/MyController.php');
+
+class IndexController extends MyController
 {
 
     public function index(Request $request)
@@ -15,7 +18,7 @@ class IndexController extends BaseController
         $admin = $request->session()->get('oauth_administrator');
         if ($admin)
         {
-            return redirect('admin/dashboard');
+            return redirect('/dashboard');
         }
         return view('user.login');
     }
@@ -32,7 +35,7 @@ class IndexController extends BaseController
             return view('user.login', $msg);
         }
         $request->session()->set('oauth_administrator', serialize($admin));
-        return redirect('admin/dashboard');
+        return redirect('/dashboard');
     }
 
 }

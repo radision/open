@@ -11,13 +11,21 @@
 |
 */
 
+// login
 Route::get('/login', 'IndexController@index');
 Route::post('/login', 'IndexController@login');
 
+// admin
+Route::get('/dashboard', 'AdminController@index');
+Route::get('/clients', 'ClientController@list');
+Route::post('/clients', 'ClientController@add');
+
+// home
 Route::get('/', function () {
     return view('welcome');
 });
 
+// OAuth 2
 Route::post('oauth/access_token', function() {
     return Response::json(Authorizer::issueAccessToken());
 });
