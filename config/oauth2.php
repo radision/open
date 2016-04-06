@@ -28,7 +28,29 @@ return [
     */
 
     'grant_types' => [
-
+        // Authorization code grant
+        'authorization_code' => [
+            'class' => '\League\OAuth2\Server\Grant\AuthCodeGrant',
+            'access_token_ttl' => 3600,
+            'auth_token_ttl' => 60
+        ],
+        // Resource owner credentials grant
+        'password' => [
+            'class' => '\League\OAuth2\Server\Grant\PasswordGrant',
+            'callback' => '\App\Verifier@verify',
+            'access_token_ttl' => 3600
+        ],
+        // Client credentials grant
+        'client_credentials' => [
+            'class' => '\League\OAuth2\Server\Grant\ClientCredentialsGrant',
+            'access_token_ttl' => 3600
+        ],
+        // Refresh token grant
+        'refresh_token' => [
+            'class' => '\League\OAuth2\Server\Grant\RefreshTokenGrant',
+            'access_token_ttl' => 3600,
+            'refresh_token_ttl' => 36000
+        ]
     ],
 
     /*
