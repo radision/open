@@ -17,8 +17,8 @@ Route::post('/login', 'IndexController@login');
 
 // admin
 Route::get('/dashboard', 'AdminController@index');
-Route::get('/clients', 'ClientController@list');
-Route::post('/clients', 'ClientController@add');
+Route::get('/client', 'ClientController@index');
+Route::post('/client', 'ClientController@add');
 
 // home
 Route::get('/', function () {
