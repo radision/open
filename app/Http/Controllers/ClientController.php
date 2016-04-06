@@ -14,13 +14,25 @@ class ClientController extends MyController
 
     public function index(Request $request)
     {
-        return view('client.list');
+        $list = DB::table('oauth_clients')->orderBy('id', 'desc')->get();
+        return view('client.list')->with('list', $list);
     }
 
     public function add(Request $request)
     {
+        $name = $request->input('name');
+        $url = $request->input('url');
 
-        return redirect('/clients');
+        $secret = md5($name.$url.time());
+
+        $max_id = DB::table('oauth_clients')->max('id');
+        $insert_id = (int)$max_id + 1;
+
+        DB::table('oauth_clients')->insert(
+            ['id' => $insert_id, 'name' => $name, 'secret' => $secret]
+        );
+
+        return redirect('/client');
     }
 
 }
