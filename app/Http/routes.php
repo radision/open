@@ -33,17 +33,17 @@ Route::post('oauth/access_token', function() {
 });
 
 Route::get('oauth/authorize', ['as' => 'oauth.authorize.get', 'middleware' => ['check-authorization-params', 'auth'], function() {
-   $authParams = Authorizer::getAuthCodeRequestParams();
+    $authParams = Authorizer::getAuthCodeRequestParams();
 
-   $formParams = array_except($authParams,'client');
+    $formParams = array_except($authParams,'client');
 
-   $formParams['client_id'] = $authParams['client']->getId();
+    $formParams['client_id'] = $authParams['client']->getId();
 
-   $formParams['scope'] = implode(config('oauth2.scope_delimiter'), array_map(function ($scope) {
-       return $scope->getId();
-   }, $authParams['scopes']));
+    $formParams['scope'] = implode(config('oauth2.scope_delimiter'), array_map(function ($scope) {
+        return $scope->getId();
+    }, $authParams['scopes']));
 
-   return View::make('oauth.authorization-form', ['params' => $formParams, 'client' => $authParams['client']]);
+    return View::make('oauth.authorization-form', ['params' => $formParams, 'client' => $authParams['client']]);
 }]);
 
 Route::post('oauth/authorize', ['as' => 'oauth.authorize.post', 'middleware' => ['csrf', 'check-authorization-params', 'auth'], function() {

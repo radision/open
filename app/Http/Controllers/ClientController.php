@@ -14,7 +14,11 @@ class ClientController extends MyController
 
     public function index(Request $request)
     {
-        $list = DB::table('oauth_clients')->orderBy('id', 'desc')->get();
+        $list = DB::table('oauth_clients')
+            ->join('oauth_client_endpoints', 'oauth_clients.id', '=', 'oauth_client_endpoints.client_id')
+            ->select('oauth_clients.*', 'oauth_client_endpoints.redirect_uri')
+            ->orderBy('oauth_clients.created_at', 'desc')
+            ->get();
         return view('client.list')->with('list', $list);
     }
 
@@ -23,13 +27,14 @@ class ClientController extends MyController
         $name = $request->input('name');
         $url = $request->input('url');
 
+        $client_id = md5(rand(0, 99999).$name.$url);
         $secret = md5($name.$url.time());
-
-        $max_id = DB::table('oauth_clients')->max('id');
-        $insert_id = (int)$max_id + 1;
-
         DB::table('oauth_clients')->insert(
-            ['id' => $insert_id, 'name' => $name, 'secret' => $secret]
+            ['id' => $client_id, 'name' => $name, 'secret' => $secret, 'created_at' => DB::raw('now()')]
+        );
+
+        DB::table('oauth_client_endpoints')->insert(
+            ['client_id' => $client_id, 'redirect_uri' => $url, 'created_at' => DB::raw('now()')]
         );
 
         return redirect('/client');
