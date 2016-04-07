@@ -32,7 +32,8 @@ Route::post('oauth/access_token', function() {
     return Response::json(Authorizer::issueAccessToken());
 });
 
-Route::get('oauth/authorize', ['as' => 'oauth.authorize.get', 'middleware' => ['check-authorization-params', 'auth'], function() {
+// Route::get('oauth/authorize', ['as' => 'oauth.authorize.get', 'middleware' => ['check-authorization-params', 'auth'], function() {
+Route::get('oauth/authorize', ['as' => 'oauth.authorize.get', 'middleware' => ['check-authorization-params'], function() {
     $authParams = Authorizer::getAuthCodeRequestParams();
 
     $formParams = array_except($authParams,'client');
@@ -46,7 +47,8 @@ Route::get('oauth/authorize', ['as' => 'oauth.authorize.get', 'middleware' => ['
     return View::make('oauth.authorization-form', ['params' => $formParams, 'client' => $authParams['client']]);
 }]);
 
-Route::post('oauth/authorize', ['as' => 'oauth.authorize.post', 'middleware' => ['csrf', 'check-authorization-params', 'auth'], function() {
+// Route::post('oauth/authorize', ['as' => 'oauth.authorize.post', 'middleware' => ['csrf', 'check-authorization-params', 'auth'], function() {
+Route::post('oauth/authorize', ['as' => 'oauth.authorize.post', 'middleware' => ['csrf', 'check-authorization-params'], function() {
 
     $params = Authorizer::getAuthCodeRequestParams();
     $params['user_id'] = Auth::user()->id;
