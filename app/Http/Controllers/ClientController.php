@@ -35,5 +35,11 @@ class ClientController extends MyController
         return redirect('/client');
     }
 
+    public function destroy($id)
+    {
+        DB::table('oauth_clients')->where('id', '=', $id)->delete();
+        return response()->json(array('error' => false));
+    }
+
 }
 

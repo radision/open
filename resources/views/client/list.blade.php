@@ -27,10 +27,17 @@
     <ul class="list-group">
         @if (!empty($list))
             @foreach ($list as $row)
-            <li class="list-group-item"><?php echo $row->name.': '.$row->secret; ?></li>
+            <li class="list-group-item">
+                <a href="javascript: void(0);" id="del_<?php echo $row->id; ?>" data-client-id="<?php echo $row->id; ?>">
+                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                </a>
+                <?php echo $row->name.': '.$row->secret; ?>
+            </li>
             @endforeach
         @endif
     </ul>
   </div>
 </div>
+
+<script src="/js/client.js"></script>
 @endsection

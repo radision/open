@@ -20,6 +20,8 @@ Route::get('/dashboard', 'AdminController@index');
 Route::get('/client', 'ClientController@index');
 Route::post('/client', 'ClientController@add');
 
+Route::delete('/client/{id}', 'ClientController@destroy');
+
 // home
 Route::get('/', function () {
     return view('welcome');
