@@ -37,7 +37,7 @@ class ClientController extends MyController
             ['client_id' => $client_id, 'redirect_uri' => $url, 'created_at' => DB::raw('now()')]
         );
 
-        return redirect('/client');
+        return redirect('/admin/client');
     }
 
     public function destroy($id)

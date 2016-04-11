@@ -12,15 +12,15 @@
 */
 
 // login
-Route::get('/login', 'IndexController@index');
-Route::post('/login', 'IndexController@login');
+Route::get('/admin/login', 'IndexController@index');
+Route::post('/admin/login', 'IndexController@login');
 
 // admin
-Route::get('/dashboard', 'AdminController@index');
-Route::get('/client', 'ClientController@index');
-Route::post('/client', 'ClientController@add');
+Route::get('/admin/dashboard', 'AdminController@index');
+Route::get('/admin/client', 'ClientController@index');
+Route::post('/admin/client', 'ClientController@add');
 
-Route::delete('/client/{id}', 'ClientController@destroy');
+Route::delete('/admin/client/{id}', 'ClientController@destroy');
 
 // home
 Route::get('/', function () {
@@ -51,7 +51,7 @@ Route::get('oauth/authorize', ['as' => 'oauth.authorize.get', 'middleware' => ['
 Route::post('oauth/authorize', ['as' => 'oauth.authorize.post', 'middleware' => ['csrf', 'check-authorization-params'], function() {
 
     $params = Authorizer::getAuthCodeRequestParams();
-    $params['user_id'] = Auth::user()->id;
+    $params['user_id'] = 0;//Auth::user()->id;
     $redirectUri = '/';
 
     // If the user has allowed the client to access its data, redirect back to the client with an auth code.

@@ -4,11 +4,11 @@
 @section('title', 'Clients List')
 
 @section('content')
-<a href="/dashboard" class="btn btn-primary">返回</a>
+<a href="/admin/dashboard" class="btn btn-primary">返回</a>
 <div class="panel panel-default">
   <div class="panel-heading">添加客户端</div>
   <div class="panel-body">
-<form class="form-inline" method="post" action="/client">
+<form class="form-inline" method="post" action="/admin/client">
   <div class="form-group">
     <label class="sr-only" for="client_name">应用名称</label>
     <input type="text" class="form-control" id="client_name" name="name" placeholder="应用名称">

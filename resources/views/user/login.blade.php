@@ -11,7 +11,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">管理员登录</div>
           <div class="panel-body">
-            <form method="post" class="form-inline" action="/login">
+            <form method="post" class="form-inline" action="/admin/login">
               <div class="form-group">
                 <label class="sr-only" for="admin_name">用户名</label>
                 <input type="text" class="form-control" id="admin_name" name="name" placeholder="用户名">

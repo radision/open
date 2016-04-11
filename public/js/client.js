@@ -4,11 +4,11 @@ $(function() {
 
   function delete_client(id) {
     $.ajax({
-      url: '/client/' + id,
+      url: '/admin/client/' + id,
       type: 'DELETE',
       success: function(result) {
         if (result.error == false) {
-            window.location.href = '/client';
+            window.location.href = '/admin/client';
             return true;
         }
         alert('删除失败，请检查后再试');

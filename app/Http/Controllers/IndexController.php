@@ -15,7 +15,7 @@ class IndexController extends BaseController
         $admin = $request->session()->get('oauth_administrator');
         if ($admin)
         {
-            return redirect('/dashboard');
+            return redirect('/admin/dashboard');
         }
         return view('user.login');
     }
@@ -32,7 +32,7 @@ class IndexController extends BaseController
             return view('user.login', $msg);
         }
         $request->session()->set('oauth_administrator', serialize($admin));
-        return redirect('/dashboard');
+        return redirect('/admin/dashboard');
     }
 
 }
