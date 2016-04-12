@@ -11,16 +11,23 @@
 |
 */
 
-// login
+// admin login
 Route::get('/admin/login', 'IndexController@index');
 Route::post('/admin/login', 'IndexController@login');
 
-// admin
+// admin dashboard
 Route::get('/admin/dashboard', 'AdminController@index');
+
+// admin client
 Route::get('/admin/client', 'ClientController@index');
 Route::post('/admin/client', 'ClientController@add');
-
 Route::delete('/admin/client/{id}', 'ClientController@destroy');
+
+// admin user
+Route::get('/admin/user', 'UserController@index');
+Route::post('/admin/user', 'UserController@add');
+Route::get('/login', 'UserController@login');
+Route::get('/profile', 'UserController@get');
 
 // home
 Route::get('/', function () {
