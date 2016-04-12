@@ -26,7 +26,10 @@ Route::delete('/admin/client/{id}', 'ClientController@destroy');
 // admin user
 Route::get('/admin/user', 'UserController@index');
 Route::post('/admin/user', 'UserController@add');
+
+// user login
 Route::get('/login', 'UserController@login');
+Route::post('/login', 'UserController@verify');
 Route::get('/profile', 'UserController@get');
 
 // home

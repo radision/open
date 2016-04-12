@@ -1,11 +1,11 @@
 @extends('layouts.master')
 
-@section('title', 'User Login')
+@section('title', 'Administrator Login')
 
 @section('content')
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
-        @if ($error)
+        @if (!empty($error))
         <div class="alert alert-danger" role="alert"><?php echo $error; ?></div>
         @endif
         <div class="panel panel-default">
