@@ -14,7 +14,7 @@ class UserController extends MyController
 
     public function index(Request $request)
     {
-        $list = DB::table('user')
+        $list = DB::table('users')
             ->orderBy('user.created_at', 'desc')
             ->get();
         return view('user.list')->with('list', $list);
@@ -26,7 +26,7 @@ class UserController extends MyController
         $password = $request->input('password');
 
         $password = md5($password);
-        DB::table('user')->insert(
+        DB::table('users')->insert(
             ['mobile' => $mobile, 'password' => $password, 'created_at' => DB::raw('now()')]
         );
 
