@@ -15,7 +15,7 @@ class UserController extends MyController
     public function index(Request $request)
     {
         $list = DB::table('users')
-            ->orderBy('user.created_at', 'desc')
+            ->orderBy('created_at', 'desc')
             ->get();
         return view('user.list')->with('list', $list);
     }

@@ -28,7 +28,7 @@
         @if (!empty($list))
             @foreach ($list as $row)
             <li class="list-group-item">
-                <span class="label label-default"><?php echo $row->name;?></span><?php echo $row->created_at; ?>
+                <span class="label label-default"><?php echo $row->mobile;?></span><?php echo $row->created_at; ?>
             </li>
             @endforeach
         @endif
