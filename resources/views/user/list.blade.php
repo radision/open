@@ -22,20 +22,13 @@
   </div>
 </div>
 <div class="panel panel-default">
-  <div class="panel-heading">客户端列表</div>
+  <div class="panel-heading">用户列表</div>
   <div class="panel-body">
     <ul class="list-group">
         @if (!empty($list))
             @foreach ($list as $row)
             <li class="list-group-item">
-                <a href="javascript: void(0);" id="del_<?php echo $row->id; ?>" data-client-id="<?php echo $row->id; ?>">
-                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-                </a>
-                <span class="label label-default"><?php echo $row->name;?></span><?php echo '['.$row->redirect_uri.']'; ?>
-                <ol class="breadcrumb">
-                    <li>Client ID: <?php echo $row->id; ?></li>
-                    <li>Client Secret: <?php echo $row->secret; ?></li>
-                </ol>
+                <span class="label label-default"><?php echo $row->name;?></span><?php echo $row->created_at; ?>
             </li>
             @endforeach
         @endif
@@ -43,5 +36,5 @@
   </div>
 </div>
 
-<script src="/js/client.js"></script>
+<script src="/js/user.js"></script>
 @endsection

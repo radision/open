@@ -9,7 +9,7 @@ use Illuminate\Routing\Controller as BaseController;
 
 include_once(__DIR__.'/MyController.php');
 
-class UsertController extends MyController
+class UserController extends MyController
 {
 
     public function index(Request $request)
@@ -22,12 +22,12 @@ class UsertController extends MyController
 
     public function add(Request $request)
     {
-        $name = $request->input('name');
+        $mobile = $request->input('mobile');
         $password = $request->input('password');
 
         $password = md5($password);
         DB::table('user')->insert(
-            ['name' => $name, 'password' => $password, 'created_at' => DB::raw('now()')]
+            ['mobile' => $mobile, 'password' => $password, 'created_at' => DB::raw('now()')]
         );
 
         return redirect('/admin/user');
