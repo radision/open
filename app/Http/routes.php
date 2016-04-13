@@ -30,6 +30,7 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
 });
 
 Route::get('/login', 'UserController@login');
+Route::post('/login', 'UserController@verify');
 Route::get('/profile', 'UserController@get');
 
 // home

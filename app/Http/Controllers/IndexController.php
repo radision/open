@@ -17,7 +17,7 @@ class IndexController extends BaseController
         {
             return redirect('/admin/dashboard');
         }
-        return view('user.login');
+        return view('admin.login');
     }
 
     public function login(Request $request)
@@ -29,7 +29,7 @@ class IndexController extends BaseController
         if (! $admin)
         {
             $msg = array('error' => '错误的用户名或密码');
-            return view('user.login', $msg);
+            return view('admin.login', $msg);
         }
         $request->session()->set('oauth_administrator', serialize($admin));
         return redirect('/admin/dashboard');

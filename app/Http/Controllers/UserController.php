@@ -15,7 +15,7 @@ class UserController extends MyController
     public function index(Request $request)
     {
         $list = DB::table('users')
-            ->orderBy('user.created_at', 'desc')
+            ->orderBy('created_at', 'desc')
             ->get();
         return view('user.list')->with('list', $list);
     }
@@ -31,6 +31,29 @@ class UserController extends MyController
         );
 
         return redirect('/admin/user');
+    }
+
+    public function login(Request $request)
+    {
+        echo 'login';exit();
+        return view('user.login');
+    }
+
+    public function verify(Request $request)
+    {
+        $mobile = $request->input('mobile');
+        $password = $request->input('password');
+
+        $password = md5($password);
+        $user = DB::table('users')
+            ->where('mobile', '=', $mobile)
+            ->where('password', '=', $password)
+            ->first();
+        if ($user)
+        {
+            return redirect('/dashboard');
+        }
+        return view('user.login')->with('error', '错误的手机号或密码');
     }
 
     public function profile()
