@@ -29,9 +29,15 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
     Route::post('user', 'Admin\UserController@add');
 });
 
-Route::get('/login', 'UserController@login');
-Route::post('/login', 'UserController@verify');
-Route::get('/profile', 'UserController@get');
+// user login
+Route::get('/login', 'IndexController@login');
+Route::post('/login', 'IndexController@verify');
+
+Route::group(['middleware' => 'user'], function () {
+    // user profile
+    Route::get('/profile', 'UserController@profile');
+
+});
 
 // home
 Route::get('/', function () {

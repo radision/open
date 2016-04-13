@@ -7,58 +7,14 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 
-include_once(__DIR__.'/MyController.php');
-
-class UserController extends MyController
+class UserController extends BaseController
 {
 
-    public function index(Request $request)
+    public function profile(Request $request)
     {
-        $list = DB::table('users')
-            ->orderBy('created_at', 'desc')
-            ->get();
-        return view('user.list')->with('list', $list);
-    }
-
-    public function add(Request $request)
-    {
-        $mobile = $request->input('mobile');
-        $password = $request->input('password');
-
-        $password = md5($password);
-        DB::table('users')->insert(
-            ['mobile' => $mobile, 'password' => $password, 'created_at' => DB::raw('now()')]
-        );
-
-        return redirect('/admin/user');
-    }
-
-    public function login(Request $request)
-    {
-        echo 'login';exit();
-        return view('user.login');
-    }
-
-    public function verify(Request $request)
-    {
-        $mobile = $request->input('mobile');
-        $password = $request->input('password');
-
-        $password = md5($password);
-        $user = DB::table('users')
-            ->where('mobile', '=', $mobile)
-            ->where('password', '=', $password)
-            ->first();
-        if ($user)
-        {
-            return redirect('/dashboard');
-        }
-        return view('user.login')->with('error', '错误的手机号或密码');
-    }
-
-    public function profile()
-    {
-
+        $user = $request->session()->get('oauth_user');
+        $user_info = unserialize($user);
+        return view('user.profile')->with('user_info', $user_info);
     }
 
 }

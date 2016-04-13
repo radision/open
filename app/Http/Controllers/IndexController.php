@@ -10,29 +10,34 @@ use Illuminate\Routing\Controller as BaseController;
 class IndexController extends BaseController
 {
 
-    public function index(Request $request)
-    {
-        $admin = $request->session()->get('oauth_administrator');
-        if ($admin)
-        {
-            return redirect('/admin/dashboard');
-        }
-        return view('admin.login');
-    }
-
     public function login(Request $request)
     {
-        $name = $request->input('name');
-        $passwd = $request->input('passwd');
-
-        $admin = DB::table('admin')->where('name', $name)->where('passwd', md5($passwd))->first();
-        if (! $admin)
-        {
-            $msg = array('error' => '错误的用户名或密码');
-            return view('admin.login', $msg);
-        }
-        $request->session()->set('oauth_administrator', serialize($admin));
-        return redirect('/admin/dashboard');
+        return view('user.login');
     }
+
+    public function logout(Request $request)
+    {
+        $request->session()->forget('oauth_user');
+        $request->session()->flush();
+    }
+
+    public function verify(Request $request)
+    {
+        $mobile = $request->input('mobile');
+        $password = $request->input('password');
+        $password = md5($password);
+
+        $user = DB::table('users')
+            ->where('mobile', '=', $mobile)
+            ->where('password', '=', $password)
+            ->first();
+        if ($user)
+        {
+            $request->session()->set('oauth_user', serialize($user));
+            return redirect('/profile');
+        }
+        return view('user.login')->with('error', '错误的手机号或密码');
+    }
+
 
 }

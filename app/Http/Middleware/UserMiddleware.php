@@ -15,8 +15,8 @@ class UserMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $admin = $request->session()->get('oauth_user');
-        if (!$admin)
+        $user = $request->session()->get('oauth_user');
+        if (!$user)
         {
             return redirect('/login');
         }

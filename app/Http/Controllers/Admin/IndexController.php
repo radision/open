@@ -15,7 +15,11 @@ class IndexController extends BaseController
         $admin = $request->session()->get('oauth_administrator');
         if ($admin)
         {
-            return redirect('/admin/dashboard');
+            $admin_info = unserialize($admin);
+            if ($admin_info->id)
+            {
+                return redirect('/admin/dashboard');
+            }
         }
         return view('user.login');
     }
@@ -34,6 +38,13 @@ class IndexController extends BaseController
         $request->session()->set('oauth_administrator', serialize($admin));
         return redirect('/admin/dashboard');
     }
+
+    public function logout(Request $request)
+    {
+        $request->session()->forget('oauth_administrator');
+        $request->session()->flush();
+    }
+
 
     public function dashboard(Request $request)
     {
