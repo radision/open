@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class AdminMiddleware
+class UserMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,10 +15,10 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $admin = $request->session()->get('oauth_administrator');
+        $admin = $request->session()->get('oauth_user');
         if (!$admin)
         {
-            return redirect('/admin/login');
+            return redirect('/login');
         }
         return $next($request);
     }
