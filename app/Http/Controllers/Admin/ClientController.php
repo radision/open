@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 
-include_once(__DIR__.'/MyController.php');
-
-class ClientController extends MyController
+class ClientController extends BaseController
 {
 
     public function index(Request $request)

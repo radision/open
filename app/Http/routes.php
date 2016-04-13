@@ -12,20 +12,23 @@
 */
 
 // admin login
-Route::get('/admin/login', 'IndexController@index');
-Route::post('/admin/login', 'IndexController@login');
+Route::get('admin/login', 'Admin\IndexController@index');
+Route::post('admin/login', 'Admin\IndexController@login');
 
-// admin dashboard
-Route::get('/admin/dashboard', 'AdminController@index');
+Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
+    // admin dashboard
+    Route::get('dashboard', 'Admin\IndexController@dashboard');
 
-// admin client
-Route::get('/admin/client', 'ClientController@index');
-Route::post('/admin/client', 'ClientController@add');
-Route::delete('/admin/client/{id}', 'ClientController@destroy');
+    // admin client
+    Route::get('client', 'Admin\ClientController@index');
+    Route::post('client', 'Admin\ClientController@add');
+    Route::delete('client/{id}', 'Admin\ClientController@destroy');
 
-// admin user
-Route::get('/admin/user', 'UserController@index');
-Route::post('/admin/user', 'UserController@add');
+    // admin user
+    Route::get('user', 'Admin\UserController@index');
+    Route::post('user', 'Admin\UserController@add');
+});
+
 Route::get('/login', 'UserController@login');
 Route::get('/profile', 'UserController@get');
 

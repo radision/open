@@ -18,7 +18,7 @@ class AdminMiddleware
         $admin = $request->session()->get('oauth_administrator');
         if (!$admin)
         {
-            return redirect('/login');
+            return redirect('/admin/login');
         }
         return $next($request);
     }
