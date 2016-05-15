@@ -19,6 +19,7 @@ class IndexController extends BaseController
     {
         $request->session()->forget('oauth_user');
         $request->session()->flush();
+        return redirect('/login');
     }
 
     public function verify(Request $request)

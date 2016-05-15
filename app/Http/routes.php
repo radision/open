@@ -35,7 +35,9 @@ Route::post('/login', 'IndexController@verify');
 
 Route::group(['middleware' => 'user'], function () {
     // user profile
+    Route::get('/logout', 'IndexController@logout');
     Route::get('/profile', 'UserController@profile');
+    Route::post('/profile', 'UserController@attribute');
 
 });
 
