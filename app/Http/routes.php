@@ -71,6 +71,7 @@ Route::post('oauth/authorize', ['as' => 'oauth.authorize.post', 'middleware' => 
 
     $mobile = Request::get('mobile');
     $passwd = Request::get('passwd');
+    $mobile = intval($mobile);
     $password = md5($passwd);
 
     $user = DB::table('users')->where('mobile', '=', $mobile)->where('password', '=', $password)->first();
