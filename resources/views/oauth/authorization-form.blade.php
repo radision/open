@@ -28,7 +28,7 @@
       </div>
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-          <button class="btn btn-success" type="submit" name="approve" value="1">授权</button>
+          <button class="btn btn-success" type="submit" name="approve" value="1">登录</button>
         </div>
       </div>
     </form>

@@ -69,9 +69,19 @@ Route::get('oauth/authorize', ['as' => 'oauth.authorize.get', 'middleware' => ['
 // Route::post('oauth/authorize', ['as' => 'oauth.authorize.post', 'middleware' => ['csrf', 'check-authorization-params', 'auth'], function() {
 Route::post('oauth/authorize', ['as' => 'oauth.authorize.post', 'middleware' => ['csrf', 'check-authorization-params'], function() {
 
+    $mobile = Request::get('mobile');
+    $passwd = Request::get('passwd');
+    $password = md5($passwd);
+
+    $user = DB::table('users')->where('mobile', '=', $mobile)->where('password', '=', $password)->first();
+    if (!$user)
+    {
+        return Response::json(array('error' => 'Invalid mobile or password input.'));
+    }
+
     $params = Authorizer::getAuthCodeRequestParams();
     $params['user_id'] = 0;//Auth::user()->id;
-    $redirectUri = '/';
+    $redirectUri = 'http://gift.radision.biz';
 
     // If the user has allowed the client to access its data, redirect back to the client with an auth code.
     if (Request::has('approve')) {
@@ -82,6 +92,5 @@ Route::post('oauth/authorize', ['as' => 'oauth.authorize.post', 'middleware' => 
     if (Request::has('deny')) {
         $redirectUri = Authorizer::authCodeRequestDeniedRedirectUri();
     }
-
     return Redirect::to($redirectUri);
 }]);
