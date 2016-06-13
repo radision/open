@@ -30,12 +30,12 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
 });
 
 // user login
-Route::get('/login', 'IndexController@login');
-Route::post('/login', 'IndexController@verify');
+// Route::get('/login', 'IndexController@login');
+// Route::post('/login', 'IndexController@verify');
 
 Route::group(['middleware' => 'user'], function () {
     // user profile
-    Route::get('/logout', 'IndexController@logout');
+    // Route::get('/logout', 'IndexController@logout');
     Route::get('/profile', 'UserController@profile');
     Route::post('/profile', 'UserController@attribute');
 
@@ -95,3 +95,7 @@ Route::post('oauth/authorize', ['as' => 'oauth.authorize.post', 'middleware' => 
     }
     return Redirect::to($redirectUri);
 }]);
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
