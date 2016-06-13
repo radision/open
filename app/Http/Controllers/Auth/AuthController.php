@@ -64,13 +64,14 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+        /*
+        // disable register
         return User::create([
-            /*
-            'name' => $data['name'],
-            'email' => $data['email'],
-             */
+            // 'name' => $data['name'],
+            // 'email' => $data['email'],
             'mobile' => $data['mobile'],
             'password' => bcrypt($data['password']),
         ]);
+         */
     }
 }

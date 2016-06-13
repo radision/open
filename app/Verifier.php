@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\Auth;
 class Verifier
 {
 
-    public function verify($username, $password)
+    public function verify($mobile, $password)
     {
         $credentials = [
-            'email'    => $username,
+            'mobile'   => $mobile,
             'password' => $password,
         ];
 
