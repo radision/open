@@ -8,7 +8,10 @@
                 <div class="panel-heading">登录</div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
-                        <input type="text" name="response_type" value="">
+                        <input type="hidden" name="response_type" value="{{ app('request')->input('response_type') }}">
+                        <input type="hidden" name="client_id" value="{{ app('request')->input('client_id') }}">
+                        <input type="hidden" name="state" value="{{ app('request')->input('state') }}">
+                        <input type="hidden" name="redirect_uri" value="{{ app('request')->input('redirect_uri') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('mobile') ? ' has-error' : '' }}">

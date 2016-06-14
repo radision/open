@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -38,6 +39,21 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+    }
+
+    public function login(Request $request)
+    {
+        $response_type = $request->input('response_type');
+        $client_id = $request->input('client_id');
+        $state = $request->input('state');
+        $redirect_uri = $request->input('redirect_uri');
+        echo "response_type = $response_type\n";
+        echo "client_id = $client_id\n";
+        echo "state = $state\n";
+        echo "redirect_uri = $redirect_uri\n";
+
+        $resp = parent::login($request);
+        exit();
     }
 
     /**
