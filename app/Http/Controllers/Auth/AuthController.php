@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -40,6 +42,24 @@ class AuthController extends Controller
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
     }
 
+    public function login(Request $request)
+    {
+        $response_type = $request->input('response_type');
+        $client_id = $request->input('client_id');
+        $state = $request->input('state');
+        $redirect_uri = $request->input('redirect_uri');
+
+        $cookie_set = array(
+            'response_type'     => $response_type,
+            'client_id'         => $client_id,
+            'state'             => $state,
+            'redirect_uri'      => $redirect_uri,
+        );
+        cookie('open_client_cookie', serialize($cookie_set));
+
+        return \Illuminate\Foundation\Auth\AuthenticatesUsers::login($request);
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -48,8 +68,9 @@ class AuthController extends Controller
      */
     protected function validator(array $data)
     {
+        // disable register
         return Validator::make($data, [
-            'name' => 'required|max:255',
+            // 'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
@@ -63,10 +84,14 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+        /*
+        // disable register
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+            // 'name' => $data['name'],
+            // 'email' => $data['email'],
+            'mobile' => $data['mobile'],
             'password' => bcrypt($data['password']),
         ]);
+         */
     }
 }
