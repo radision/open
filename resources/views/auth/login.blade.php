@@ -14,15 +14,15 @@
                         <input type="hidden" name="redirect_uri" value="{{ app('request')->input('redirect_uri') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('mobile') ? ' has-error' : '' }}">
-                            <label for="mobile" class="col-md-4 control-label">手机号</label>
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label for="email" class="col-md-4 control-label">手机号</label>
 
                             <div class="col-md-6">
-                                <input id="mobile" type="text" class="form-control" name="mobile" value="{{ old('mobile') }}">
+                                <input id="email" type="text" class="form-control" name="email" value="{{ old('email') }}">
 
-                                @if ($errors->has('mobile'))
+                                @if ($errors->has('email'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('mobile') }}</strong>
+                                        <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
                             </div>
