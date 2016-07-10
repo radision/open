@@ -8,7 +8,7 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    你已成功登录
+                    You are logged in!
                 </div>
             </div>
         </div>

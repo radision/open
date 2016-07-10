@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -41,21 +40,6 @@ class AuthController extends Controller
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
     }
 
-    public function login(Request $request)
-    {
-        $response_type = $request->input('response_type');
-        $client_id = $request->input('client_id');
-        $state = $request->input('state');
-        $redirect_uri = $request->input('redirect_uri');
-        echo "response_type = $response_type\n";
-        echo "client_id = $client_id\n";
-        echo "state = $state\n";
-        echo "redirect_uri = $redirect_uri\n";
-
-        $resp = parent::login($request);
-        exit();
-    }
-
     /**
      * Get a validator for an incoming registration request.
      *
@@ -65,9 +49,8 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            //'name' => 'required|max:255',
-            //'email' => 'required|email|max:255|unique:users',
-            'mobile' => 'required|mobile|max:255|unique:users',
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
     }
@@ -80,14 +63,10 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        /*
-        // disable register
         return User::create([
-            // 'name' => $data['name'],
-            // 'email' => $data['email'],
-            'mobile' => $data['mobile'],
+            'name' => $data['name'],
+            'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
-         */
     }
 }

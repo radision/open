@@ -99,3 +99,7 @@ Route::post('oauth/authorize', ['as' => 'oauth.authorize.post', 'middleware' => 
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
